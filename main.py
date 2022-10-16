@@ -3,8 +3,7 @@ import os
 import random
 from function import gravity
 
-pygame.init() # a must thing
-
+pygame.init() 
 # set the size of display
 screen_width = 480
 screen_height = 640
@@ -18,8 +17,7 @@ game_dir = os.path.dirname(__file__)
 background = pygame.image.load(os.path.join(game_dir, "background.png")).convert()
 # to make the python determine \, add additional \. like \\, / is possible instead.
 
-
-# creating character
+# creating our main character
 
 character = pygame.image.load(os.path.join(game_dir, "character.png")).convert()
 character_size = character.get_rect().size # get the size of original image. rectangle
@@ -28,9 +26,11 @@ character_height = character_size[1]
 character_x_pos = screen_width/3*1.3
 character_y_pos = screen_height/2*1.75
 
-# location to move for character
+# location to move our main character
 to_x = 0
 to_y = 0
+
+# salad object 1
 
 salad = pygame.image.load(os.path.join(game_dir, "salad.png")).convert()
 salad_size = character.get_rect().size # get the size of original image. rectangle
@@ -40,38 +40,59 @@ salad_x_pos = random.randint(0,screen_width-salad_width)
 salad_y_pos = 0
 salad_new_y_pos = 0
 
-# event roop - to keep the display up there
-running = True # to check if the game is running
 
+default_speed = 0.6
+main_char_coefficient = .5
+clock = pygame.time.Clock()
+
+# font information
+game_font = pygame.font.Font(None, 40) # font ojbect (font, size)
+
+# start time record
+start_ticks = pygame.time.get_ticks() # in ms (1 sec = 1000 ms)
+
+running = True 
 while running :
-    for event in pygame.event.get() : # to make a roop, this is a must thing to set up
+    dt = clock.tick(60)
+    for event in pygame.event.get() :
         if event.type == pygame.QUIT : # to check if the window is closed
             running = False
         
         if event.type == pygame.KEYDOWN : # to check if the key is pressed
             if event.key == pygame.K_LEFT : # to move the character to the left
-                to_x -= .3
+                to_x -= default_speed * main_char_coefficient
             elif event.key == pygame.K_RIGHT : # to move the character to the right
-                to_x += .3
+                to_x += default_speed * main_char_coefficient
         
         if event.type == pygame.KEYUP : # to check if the key is not pressed
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT :
                 to_x = 0
-            # elif event.key == pygame.K_UP or event.key == pygame.K_DOWN :
-            #     to_y = 0
 
-    character_x_pos += to_x
-    character_y_pos += to_y
-    # salad_new_y_pos += gravity(salad_new_y_pos)
-    salad_new_y_pos = gravity(salad_new_y_pos)
+    character_x_pos += to_x * dt
+    character_y_pos += to_y * dt
+    salad_new_y_pos += default_speed*5
+
+    # updating main character's actual position
+    character_position = character.get_rect()
+    character_position.left = character_x_pos
+    character_position.top = character_y_pos
+
+    # updating salad's actual position
+    salad_position = salad.get_rect()
+    salad_position.left = salad_x_pos
+    salad_position.top = salad_new_y_pos
+
+    # collsion event
+    if salad_position.colliderect(character_position):
+        print("Yummy!")
+        main_char_coefficient += 0.1
+        salad_new_y_pos = 640
+
+    # salad_new_y_pos = gravity(salad_new_y_pos)
     if(salad_new_y_pos >= 640):
         salad_new_y_pos = 0
         salad_x_pos = random.randint(0,screen_width-salad_width)
 
-
-    if(salad_new_y_pos + salad_height/2 == character_y_pos \
-        and (salad_x_pos > character_x_pos or salad_x_pos < character_x_pos + character_width)) :
-        running = False
 
 
     # set a limit of movement on X position.
