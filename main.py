@@ -1,7 +1,7 @@
 import pygame
 import os
 import random
-from function import gravity
+# from function import gravity
 
 pygame.init() 
 # set the size of display
@@ -33,12 +33,42 @@ to_y = 0
 # salad object 1
 
 salad = pygame.image.load(os.path.join(game_dir, "salad.png")).convert()
-salad_size = character.get_rect().size # get the size of original image. rectangle
+salad_size = salad.get_rect().size # get the size of original image. rectangle
 salad_width = salad_size[0]
 salad_height = salad_size[1]
 salad_x_pos = random.randint(0,screen_width-salad_width)
 salad_y_pos = 0
 salad_new_y_pos = 0
+
+# salad object 2
+
+salad2 = pygame.image.load(os.path.join(game_dir, "salad.png")).convert()
+salad2_size = salad2.get_rect().size # get the size of original image. rectangle
+salad2_width = salad2_size[0]
+salad2_height = salad2_size[1]
+salad2_x_pos = random.randint(0,screen_width-salad2_width)
+salad2_y_pos = 0
+salad2_new_y_pos = 0
+
+# chicken object 1
+
+chicken_breast = pygame.image.load(os.path.join(game_dir, "chickenBreast.png")).convert()
+chicken_breast_size = chicken_breast.get_rect().size # get the size of original image. rectangle
+chicken_breast_width = chicken_breast_size[0]
+chicken_breast_height = chicken_breast_size[1]
+chicken_breast_x_pos = random.randint(0,screen_width-chicken_breast_width)
+chicken_breast_y_pos = 0
+chicken_breast_new_y_pos = 0
+
+# chicken object 2
+
+chicken_breast2 = pygame.image.load(os.path.join(game_dir, "chickenBreast.png")).convert()
+chicken_breast2_size = chicken_breast2.get_rect().size # get the size of original image. rectangle
+chicken_breast2_width = chicken_breast2_size[0]
+chicken_breast2_height = chicken_breast2_size[1]
+chicken_breast2_x_pos = random.randint(0,screen_width-salad_width)
+chicken_breast2_y_pos = 0
+chicken_breast2_new_y_pos = 0
 
 
 default_speed = 0.6
@@ -71,6 +101,7 @@ while running :
     character_x_pos += to_x * dt
     character_y_pos += to_y * dt
     salad_new_y_pos += default_speed*5
+    chicken_breast_new_y_pos += default_speed*7
 
     # updating main character's actual position
     character_position = character.get_rect()
@@ -82,18 +113,29 @@ while running :
     salad_position.left = salad_x_pos
     salad_position.top = salad_new_y_pos
 
+    # updating chicken breast's actual position
+    chicken_breast_position = chicken_breast.get_rect()
+    chicken_breast_position.left = chicken_breast_x_pos
+    chicken_breast_position.top = chicken_breast_new_y_pos
+
     # collsion event
     if salad_position.colliderect(character_position):
         print("Yummy!")
         main_char_coefficient += 0.1
         salad_new_y_pos = 640
+    if chicken_breast_position.colliderect(character_position):
+        print("Yum! Yummy!")
+        main_char_coefficient += 0.2
+        chicken_breast_new_y_pos = 640    
 
     # salad_new_y_pos = gravity(salad_new_y_pos)
     if(salad_new_y_pos >= 640):
         salad_new_y_pos = 0
         salad_x_pos = random.randint(0,screen_width-salad_width)
 
-
+    if(chicken_breast_new_y_pos >= 640):
+        chicken_breast_new_y_pos = 0
+        chicken_breast_x_pos = random.randint(0,screen_width-salad_width)
 
     # set a limit of movement on X position.
     if character_x_pos < 0 :
@@ -105,6 +147,7 @@ while running :
     screen.blit(background,(0,0)) # add background information
     
     screen.blit(salad, (salad_x_pos,salad_new_y_pos))
+    screen.blit(chicken_breast, (chicken_breast_x_pos,chicken_breast_new_y_pos))
     screen.blit(character, (character_x_pos,character_y_pos)) # character create 
     
     
