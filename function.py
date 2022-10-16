@@ -1,6 +1,6 @@
 
 def gravity(x):
-    y = 2*x
-    return y
+    if x > 640 : return 640
+    return x+0.2
 
 
