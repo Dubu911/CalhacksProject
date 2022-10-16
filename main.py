@@ -75,9 +75,9 @@ icecream_y_pos = 0
 icecream_new_y_pos = 0
 
 
-phase2_start = 15
-phase3_start = 25
-phase4_start = 35
+phase2_start = 20
+phase3_start = 35
+phase4_start = 50
 ####################################### phase 2 ##############################################
 # cake object 2
 
