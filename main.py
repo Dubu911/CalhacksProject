@@ -9,18 +9,19 @@ screen_height = 640
 screen = pygame.display.set_mode((screen_width,screen_height))
 
 # title set
-pygame.display.set_caption('Hello Daeyoung')
+pygame.display.set_caption('Wellcome to the weird game')
 
 # setting the background
 game_dir = os.path.dirname(__file__)
-background = pygame.image.load('D:\\Python\\Nado_Coding\\pygame_basic\\background.png')
+# background = pygame.image.load('D:\\Python\\Nado_Coding\\pygame_basic\\background.png')
+background = pygame.image.load(os.path.join(game_dir, "background.png")).convert()
 # open that image file and right click, copy path and paste
 # to make the python determine \, add additional \. like \\, / is possible instead.
 
 
 # creating character
 
-character = pygame.image.load('D:\\Python\\Nado_Coding\\pygame_basic\\character.png')
+character = pygame.image.load(os.path.join(game_dir, "character.png")).convert()
 character_size = character.get_rect().size # get the size of original image. rectangle
 character_width = character_size[0]
 character_height = character_size[1]
