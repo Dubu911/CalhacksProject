@@ -70,6 +70,26 @@ chicken_breast2_x_pos = random.randint(0,screen_width-salad_width)
 chicken_breast2_y_pos = 0
 chicken_breast2_new_y_pos = 0
 
+# cake object
+
+cake = pygame.image.load(os.path.join(game_dir, "cake.png")).convert()
+cake_size = cake.get_rect().size # get the size of original image. rectangle
+cake_width = cake_size[0]
+cake_height = cake_size[1]
+cake_x_pos = random.randint(0,screen_width - cake_width)
+cake_y_pos = 0
+cake_new_y_pos = 0
+
+# icecream object
+
+icecream =  pygame.image.load(os.path.join(game_dir, "icecream.png")).convert()
+icecream_size = icecream.get_rect().size # get the size of original image. rectangle
+icecream_width = icecream_size[0]
+icecream_height = icecream_size[1]
+icecream_x_pos = random.randint(0,screen_width - icecream_width)
+icecream_y_pos = 0
+icecream_new_y_pos = 0
+
 
 default_speed = 0.6
 main_char_coefficient = .5
@@ -83,6 +103,10 @@ start_ticks = pygame.time.get_ticks() # in ms (1 sec = 1000 ms)
 
 running = True 
 while running :
+    
+    if main_char_coefficient < 0:
+        running = False
+
     dt = clock.tick(60)
     for event in pygame.event.get() :
         if event.type == pygame.QUIT : # to check if the window is closed
@@ -102,6 +126,8 @@ while running :
     character_y_pos += to_y * dt
     salad_new_y_pos += default_speed*5
     chicken_breast_new_y_pos += default_speed*7
+    cake_new_y_pos += default_speed*6
+    icecream_new_y_pos += default_speed*7
 
     # updating main character's actual position
     character_position = character.get_rect()
@@ -118,6 +144,16 @@ while running :
     chicken_breast_position.left = chicken_breast_x_pos
     chicken_breast_position.top = chicken_breast_new_y_pos
 
+    # updating cake's actual position
+    cake_position = cake.get_rect()
+    cake_position.left = cake_x_pos
+    cake_position.top = cake_new_y_pos
+
+    # updating icecream's actual position
+    icecream_position = icecream.get_rect()
+    icecream_position.left = icecream_x_pos
+    icecream_position.top = icecream_new_y_pos
+
     # collsion event
     if salad_position.colliderect(character_position):
         print("Yummy!")
@@ -126,7 +162,15 @@ while running :
     if chicken_breast_position.colliderect(character_position):
         print("Yum! Yummy!")
         main_char_coefficient += 0.2
-        chicken_breast_new_y_pos = 640    
+        chicken_breast_new_y_pos = 640
+    if cake_position.colliderect(character_position):
+        print("Even more yummy!!")
+        main_char_coefficient -= 0.2    
+        cake_new_y_pos = 640
+    if icecream_position.colliderect(character_position):
+        print("Omg I love it!")
+        main_char_coefficient -= 0.15    
+        icecream_new_y_pos = 640
 
     # salad_new_y_pos = gravity(salad_new_y_pos)
     if(salad_new_y_pos >= 640):
@@ -135,19 +179,29 @@ while running :
 
     if(chicken_breast_new_y_pos >= 640):
         chicken_breast_new_y_pos = 0
-        chicken_breast_x_pos = random.randint(0,screen_width-salad_width)
+        chicken_breast_x_pos = random.randint(0,screen_width- chicken_breast_width)
+
+    if(cake_new_y_pos >= 640):
+        cake_new_y_pos = 0
+        cake_x_pos = random.randint(0,screen_width - cake_width)
+
+    if(icecream_new_y_pos >= 640):
+        icecream_new_y_pos = 0
+        icecream_x_pos = random.randint(0,screen_width - icecream_width)
 
     # set a limit of movement on X position.
     if character_x_pos < 0 :
         character_x_pos = 0
     elif character_x_pos > screen_width - character_width :
         character_x_pos = screen_width - character_width
-    
+
 
     screen.blit(background,(0,0)) # add background information
     
     screen.blit(salad, (salad_x_pos,salad_new_y_pos))
     screen.blit(chicken_breast, (chicken_breast_x_pos,chicken_breast_new_y_pos))
+    screen.blit(cake, (cake_x_pos,cake_new_y_pos))
+    screen.blit(icecream, (icecream_x_pos, icecream_new_y_pos))
     screen.blit(character, (character_x_pos,character_y_pos)) # character create 
     
     
