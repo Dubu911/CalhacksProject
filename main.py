@@ -1,4 +1,5 @@
 import pygame
+import os
 
 pygame.init() # a must thing
 
@@ -11,6 +12,7 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption('Hello Daeyoung')
 
 # setting the background
+game_dir = os.path.dirname(__file__)
 background = pygame.image.load('D:\\Python\\Nado_Coding\\pygame_basic\\background.png')
 # open that image file and right click, copy path and paste
 # to make the python determine \, add additional \. like \\, / is possible instead.
