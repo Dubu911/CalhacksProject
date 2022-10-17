@@ -5,6 +5,15 @@ import os
 import random
 # from function import gravity
 
+################## difficulty settings #######################
+phase2_start = 25
+phase3_start = 40
+phase4_start = 50
+default_speed = 0.6
+main_char_coefficient = .6
+
+##############################################################
+
 pygame.init() 
 # set the size of display
 screen_width = 480
@@ -24,16 +33,30 @@ defeat_screen = pygame.image.load(os.path.join(game_dir, "DefeatScreen.png")).co
 
 # creating yummy effects 
 yummy = pygame.image.load(os.path.join(game_dir, "EatHealthy.png")).convert()
+yummy_size = yummy.get_rect().size
+yummy_width = yummy_size[0]
+yummy_height = yummy_size[1]
+
 too_yummy = pygame.image.load(os.path.join(game_dir, "EatUnhealthy.png")).convert()
+too_yummy_size = too_yummy.get_rect().size
+too_yummy_width = too_yummy_size[0]
+too_yummy_height = too_yummy_size[1]
 
 # creating our main character
 
-character = pygame.image.load(os.path.join(game_dir, "character.png")).convert()
-character_size = character.get_rect().size # get the size of original image. rectangle
-character_width = character_size[0]
-character_height = character_size[1]
-character_x_pos = screen_width/3*1.3
-character_y_pos = screen_height/2*1.75
+normal_character = pygame.image.load(os.path.join(game_dir, "character.png")).convert()
+normal_character_size = normal_character.get_rect().size # get the size of original image. rectangle
+normal_character_width = normal_character_size[0]
+normal_character_height = normal_character_size[1]
+normal_character_x_pos = screen_width/3*1.3
+normal_character_y_pos = screen_height/2*1.75
+
+character = normal_character
+character_size = normal_character_size
+character_width = normal_character_width
+character_height = normal_character_height
+character_x_pos = normal_character_x_pos
+character_y_pos = normal_character_y_pos
 
 # creating bigger version of main character
 character_bigger = pygame.image.load(os.path.join(game_dir, "biggercharacter.png")).convert()
@@ -89,10 +112,6 @@ icecream_x_pos = random.randint(0,screen_width - icecream_width)
 icecream_y_pos = 0
 icecream_new_y_pos = 0
 
-
-phase2_start = 25
-phase3_start = 40
-phase4_start = 50
 ####################################### phase 2 ##############################################
 # cake object 2
 
@@ -162,9 +181,6 @@ icecream4_new_y_pos = 0
 
 ##############################################################################################
 
-
-default_speed = 0.6
-main_char_coefficient = .5
 clock = pygame.time.Clock()
 
 # font information
@@ -184,6 +200,17 @@ while running :
         running = False
     if elapsed_time >= 60 :
         running = False
+
+    # character shape update
+    if main_char_coefficient > 0.6 :
+        character = normal_character
+        character_size = normal_character_size
+    elif main_char_coefficient > 0.4 :
+        character = character_bigger
+        character_size = character_bigger_size
+    else :
+        character = character_biggest
+        character_size = character_biggest_size
 
     dt = clock.tick(60)
     for event in pygame.event.get() :
@@ -249,11 +276,11 @@ while running :
         icecream2_position.top = icecream2_new_y_pos
 
         if cake2_position.colliderect(character_position):
-            print("Yummy!")
+            screen.blit(too_yummy,(cake2_x_pos,cake2_new_y_pos))
             main_char_coefficient -= 0.15
             cake2_new_y_pos = 640
         if icecream2_position.colliderect(character_position):
-            print("Yummy!")
+            screen.blit(too_yummy,(icecream2_x_pos,icecream2_new_y_pos))
             main_char_coefficient -= 0.15
             icecream2_new_y_pos = 640
 
@@ -274,11 +301,11 @@ while running :
         icecream3_position.top = icecream3_new_y_pos
 
         if cake3_position.colliderect(character_position):
-            print("Yummy!")
+            screen.blit(too_yummy,(cake3_x_pos,cake3_new_y_pos))
             main_char_coefficient -= 0.15
             cake3_new_y_pos = 640
         if icecream3_position.colliderect(character_position):
-            print("Yummy!")
+            screen.blit(too_yummy,(icecream3_x_pos,icecream3_new_y_pos))
             main_char_coefficient -= 0.15
             icecream3_new_y_pos = 640
 
@@ -299,29 +326,29 @@ while running :
         icecream4_position.top = icecream4_new_y_pos
 
         if cake4_position.colliderect(character_position):
-            print("Yummy!")
+            screen.blit(too_yummy,(cake4_x_pos,cake4_new_y_pos))
             main_char_coefficient -= 0.15
             cake4_new_y_pos = 640
         if icecream4_position.colliderect(character_position):
-            print("Yummy!")
+            screen.blit(too_yummy,(icecream4_x_pos,icecream4_new_y_pos))
             main_char_coefficient -= 0.15
             icecream4_new_y_pos = 640
 
     # collsion event
     if salad_position.colliderect(character_position):
-        print("Yummy!")
+        screen.blit(yummy, (salad_x_pos, salad_new_y_pos))
         main_char_coefficient += 0.03
         salad_new_y_pos = 640
     if chicken_breast_position.colliderect(character_position):
-        print("Yum! Yummy!")
+        screen.blit(yummy, (chicken_breast_x_pos, chicken_breast_new_y_pos))
         main_char_coefficient += 0.03
         chicken_breast_new_y_pos = 640
     if cake_position.colliderect(character_position):
-        print("Even more yummy!!")
+        screen.blit(too_yummy,(cake_x_pos,cake_new_y_pos))
         main_char_coefficient -= 0.15    
         cake_new_y_pos = 640
     if icecream_position.colliderect(character_position):
-        print("Omg I love it!")
+        screen.blit(too_yummy,(icecream_x_pos,icecream_new_y_pos))
         main_char_coefficient -= 0.1    
         icecream_new_y_pos = 640
 
