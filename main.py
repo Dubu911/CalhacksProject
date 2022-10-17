@@ -17,7 +17,14 @@ pygame.display.set_caption('Wellcome to the weird game')
 # setting the background
 game_dir = os.path.dirname(__file__)
 background = pygame.image.load(os.path.join(game_dir, "background.png")).convert()
+win_screen = pygame.image.load(os.path.join(game_dir, "WinScreen.png")).convert()
+defeat_screen = pygame.image.load(os.path.join(game_dir, "DefeatScreen.png")).convert()
 # to make the python determine \, add additional \. like \\, / is possible instead.
+
+
+# creating yummy effects 
+yummy = pygame.image.load(os.path.join(game_dir, "EatHealthy.png")).convert()
+too_yummy = pygame.image.load(os.path.join(game_dir, "EatUnhealthy.png")).convert()
 
 # creating our main character
 
@@ -27,6 +34,14 @@ character_width = character_size[0]
 character_height = character_size[1]
 character_x_pos = screen_width/3*1.3
 character_y_pos = screen_height/2*1.75
+
+# creating bigger version of main character
+character_bigger = pygame.image.load(os.path.join(game_dir, "biggercharacter.png")).convert()
+character_bigger_size = character_bigger.get_rect().size # get the size of original image. rectangle
+
+# creating biggest version of main character
+character_biggest = pygame.image.load(os.path.join(game_dir, "biggerercharacter.png")).convert()
+character_biggest_size = character_biggest.get_rect().size # get the size of original image. rectangle
 
 # location to move our main character
 to_x = 0
@@ -75,8 +90,8 @@ icecream_y_pos = 0
 icecream_new_y_pos = 0
 
 
-phase2_start = 20
-phase3_start = 35
+phase2_start = 25
+phase3_start = 40
 phase4_start = 50
 ####################################### phase 2 ##############################################
 # cake object 2
@@ -357,32 +372,36 @@ while running :
     elif character_x_pos > screen_width - character_width :
         character_x_pos = screen_width - character_width
 
+    if running :
+        screen.blit(background,(0,0)) # add background information
+        screen.blit(salad, (salad_x_pos,salad_new_y_pos))
+        screen.blit(chicken_breast, (chicken_breast_x_pos,chicken_breast_new_y_pos))
+        screen.blit(cake, (cake_x_pos,cake_new_y_pos))
+        screen.blit(icecream, (icecream_x_pos, icecream_new_y_pos))
 
-    screen.blit(background,(0,0)) # add background information
-    screen.blit(salad, (salad_x_pos,salad_new_y_pos))
-    screen.blit(chicken_breast, (chicken_breast_x_pos,chicken_breast_new_y_pos))
-    screen.blit(cake, (cake_x_pos,cake_new_y_pos))
-    screen.blit(icecream, (icecream_x_pos, icecream_new_y_pos))
+        if elapsed_time >= phase2_start:
+            screen.blit(cake2, (cake2_x_pos,cake2_new_y_pos))
+            screen.blit(icecream2, (icecream2_x_pos, icecream2_new_y_pos))
+        if elapsed_time >= phase3_start:
+            screen.blit(cake3, (cake3_x_pos,cake3_new_y_pos))
+            screen.blit(icecream3, (icecream3_x_pos, icecream3_new_y_pos))
+        if elapsed_time >= phase4_start:
+            screen.blit(cake4, (cake4_x_pos,cake4_new_y_pos))
+            screen.blit(icecream4, (icecream4_x_pos, icecream4_new_y_pos))
+        screen.blit(character, (character_x_pos,character_y_pos)) # character create 
 
-    if elapsed_time >= phase2_start:
-        screen.blit(cake2, (cake2_x_pos,cake2_new_y_pos))
-        screen.blit(icecream2, (icecream2_x_pos, icecream2_new_y_pos))
-    if elapsed_time >= phase3_start:
-        screen.blit(cake3, (cake3_x_pos,cake3_new_y_pos))
-        screen.blit(icecream3, (icecream3_x_pos, icecream3_new_y_pos))
-    if elapsed_time >= phase4_start:
-        screen.blit(cake4, (cake4_x_pos,cake4_new_y_pos))
-        screen.blit(icecream4, (icecream4_x_pos, icecream4_new_y_pos))
+    elif main_char_coefficient <= 0 :
+        screen.blit(defeat_screen,(0,0))
+    else :
+        screen.blit(win_screen,(0,0))
 
 
-    screen.blit(character, (character_x_pos,character_y_pos)) # character create 
     screen.blit(timer, (200, 10))
     
     
     pygame.display.update() # to update the display on every single frame.
 # exit pygame
-if main_char_coefficient <= 0 :
-    print("game over. you lose")
-else :
-    print("you win")
+
+pygame.time.delay(5000)
+
 pygame.quit()
