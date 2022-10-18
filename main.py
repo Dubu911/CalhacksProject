@@ -185,10 +185,6 @@ icecream4_new_y_pos = 0
 # font information
 game_font = pygame.font.Font(None, 40) # font ojbect (font, size)
 
-# start time record
-start_ticks = pygame.time.get_ticks() # in ms (1 sec = 1000 ms)
-
-
 while True :
     screen.blit(start_screen,(0,0))      
     pygame.display.update()
@@ -202,6 +198,8 @@ while True :
             break
         break
     
+# start time record
+start_ticks = pygame.time.get_ticks() # in ms (1 sec = 1000 ms)
 clock = pygame.time.Clock()
 running = True 
 while running :
