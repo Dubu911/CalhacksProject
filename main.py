@@ -182,8 +182,6 @@ icecream4_new_y_pos = 0
 
 ##############################################################################################
 
-clock = pygame.time.Clock()
-
 # font information
 game_font = pygame.font.Font(None, 40) # font ojbect (font, size)
 
@@ -204,7 +202,7 @@ while True :
             break
         break
     
-
+clock = pygame.time.Clock()
 running = True 
 while running :
     #time calculation
