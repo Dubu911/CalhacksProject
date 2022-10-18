@@ -202,7 +202,7 @@ while running :
         running = False
 
     # character shape update
-    if main_char_coefficient > 0.6 :
+    if main_char_coefficient > 0.65 :
         character = normal_character
         character_size = normal_character_size
     elif main_char_coefficient > 0.4 :
