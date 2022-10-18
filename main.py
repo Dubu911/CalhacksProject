@@ -21,11 +21,12 @@ screen_height = 640
 screen = pygame.display.set_mode((screen_width,screen_height))
 
 # title set
-pygame.display.set_caption('Wellcome to the weird game')
+pygame.display.set_caption('Get Fit or Quit')
 
 # setting the background
 game_dir = os.path.dirname(__file__)
 background = pygame.image.load(os.path.join(game_dir, "background.png")).convert()
+start_screen = pygame.image.load(os.path.join(game_dir, "startingPage.png")).convert()
 win_screen = pygame.image.load(os.path.join(game_dir, "WinScreen.png")).convert()
 defeat_screen = pygame.image.load(os.path.join(game_dir, "DefeatScreen.png")).convert()
 # to make the python determine \, add additional \. like \\, / is possible instead.
@@ -189,7 +190,21 @@ game_font = pygame.font.Font(None, 40) # font ojbect (font, size)
 # start time record
 start_ticks = pygame.time.get_ticks() # in ms (1 sec = 1000 ms)
 
-score = 0
+
+while True :
+    screen.blit(start_screen,(0,0))      
+    pygame.display.update()
+    for event in pygame.event.get() :
+        if event.type == pygame.QUIT : # to check if the window is closed
+            running = False
+            break
+    
+    if event.type == pygame.KEYDOWN : 
+        if event.key == pygame.K_SPACE :
+            break
+        break
+    
+
 running = True 
 while running :
     #time calculation
@@ -202,7 +217,7 @@ while running :
         running = False
 
     # character shape update
-    if main_char_coefficient > 0.65 :
+    if main_char_coefficient > 0.75 :
         character = normal_character
         character_size = normal_character_size
     elif main_char_coefficient > 0.4 :
