@@ -6,7 +6,7 @@ A fast-paced arcade game built with Pygame where players must make healthy food 
 
 <p align="center">
   <img src="images/startingPage.png" width="45%" />
-  <img src="images/in_game_screenshot.png" width="45%" />
+  <img src="images/in_game_screenshot2.png" width="45%" />
 </p>
 
 <p align="center">
