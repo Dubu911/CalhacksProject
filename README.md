@@ -78,7 +78,7 @@ This project is open source and available for everybody.
 
 ## Credits
 
-Developed by the weirdBros
+Developed by the chonkyBros
 
 ---
 
