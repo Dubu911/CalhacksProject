@@ -25,27 +25,28 @@ pygame.display.set_caption('Get Fit or Quit')
 
 # setting the background
 game_dir = os.path.dirname(__file__)
-background = pygame.image.load(os.path.join(game_dir, "background.png")).convert()
-start_screen = pygame.image.load(os.path.join(game_dir, "startingPage.png")).convert()
-win_screen = pygame.image.load(os.path.join(game_dir, "WinScreen.png")).convert()
-defeat_screen = pygame.image.load(os.path.join(game_dir, "DefeatScreen.png")).convert()
+images_dir = os.path.join(game_dir, "images")
+background = pygame.image.load(os.path.join(images_dir, "background.png")).convert()
+start_screen = pygame.image.load(os.path.join(images_dir, "startingPage.png")).convert()
+win_screen = pygame.image.load(os.path.join(images_dir, "WinScreen.png")).convert()
+defeat_screen = pygame.image.load(os.path.join(images_dir, "DefeatScreen.png")).convert()
 # to make the python determine \, add additional \. like \\, / is possible instead.
 
 
-# creating yummy effects 
-yummy = pygame.image.load(os.path.join(game_dir, "EatHealthy.png")).convert()
+# creating yummy effects
+yummy = pygame.image.load(os.path.join(images_dir, "EatHealthy.png")).convert()
 yummy_size = yummy.get_rect().size
 yummy_width = yummy_size[0]
 yummy_height = yummy_size[1]
 
-too_yummy = pygame.image.load(os.path.join(game_dir, "EatUnhealthy.png")).convert()
+too_yummy = pygame.image.load(os.path.join(images_dir, "EatUnhealthy.png")).convert()
 too_yummy_size = too_yummy.get_rect().size
 too_yummy_width = too_yummy_size[0]
 too_yummy_height = too_yummy_size[1]
 
 # creating our main character
 
-normal_character = pygame.image.load(os.path.join(game_dir, "character.png")).convert()
+normal_character = pygame.image.load(os.path.join(images_dir, "character.png")).convert()
 normal_character_size = normal_character.get_rect().size # get the size of original image. rectangle
 normal_character_width = normal_character_size[0]
 normal_character_height = normal_character_size[1]
@@ -60,11 +61,11 @@ character_x_pos = normal_character_x_pos
 character_y_pos = normal_character_y_pos
 
 # creating bigger version of main character
-character_bigger = pygame.image.load(os.path.join(game_dir, "biggercharacter.png")).convert()
+character_bigger = pygame.image.load(os.path.join(images_dir, "biggercharacter.png")).convert()
 character_bigger_size = character_bigger.get_rect().size # get the size of original image. rectangle
 
 # creating biggest version of main character
-character_biggest = pygame.image.load(os.path.join(game_dir, "biggerercharacter.png")).convert()
+character_biggest = pygame.image.load(os.path.join(images_dir, "biggerercharacter.png")).convert()
 character_biggest_size = character_biggest.get_rect().size # get the size of original image. rectangle
 
 # location to move our main character
@@ -75,7 +76,7 @@ to_y = 0
 
 # salad object 1
 
-salad = pygame.image.load(os.path.join(game_dir, "salad.png")).convert()
+salad = pygame.image.load(os.path.join(images_dir, "salad.png")).convert()
 salad_size = salad.get_rect().size # get the size of original image. rectangle
 salad_width = salad_size[0]
 salad_height = salad_size[1]
@@ -85,7 +86,7 @@ salad_new_y_pos = 0
 
 # chicken object 1
 
-chicken_breast = pygame.image.load(os.path.join(game_dir, "chickenBreast.png")).convert()
+chicken_breast = pygame.image.load(os.path.join(images_dir, "chickenBreast.png")).convert()
 chicken_breast_size = chicken_breast.get_rect().size # get the size of original image. rectangle
 chicken_breast_width = chicken_breast_size[0]
 chicken_breast_height = chicken_breast_size[1]
@@ -95,7 +96,7 @@ chicken_breast_new_y_pos = 0
 
 # cake object
 
-cake = pygame.image.load(os.path.join(game_dir, "cake.png")).convert()
+cake = pygame.image.load(os.path.join(images_dir, "cake.png")).convert()
 cake_size = cake.get_rect().size # get the size of original image. rectangle
 cake_width = cake_size[0]
 cake_height = cake_size[1]
@@ -105,7 +106,7 @@ cake_new_y_pos = 0
 
 # icecream object
 
-icecream =  pygame.image.load(os.path.join(game_dir, "icecream.png")).convert()
+icecream =  pygame.image.load(os.path.join(images_dir, "icecream.png")).convert()
 icecream_size = icecream.get_rect().size # get the size of original image. rectangle
 icecream_width = icecream_size[0]
 icecream_height = icecream_size[1]
@@ -116,7 +117,7 @@ icecream_new_y_pos = 0
 ####################################### phase 2 ##############################################
 # cake object 2
 
-cake2 = pygame.image.load(os.path.join(game_dir, "cake.png")).convert()
+cake2 = pygame.image.load(os.path.join(images_dir, "cake.png")).convert()
 cake2_size = cake2.get_rect().size # get the size of original image. rectangle
 cake2_width = cake2_size[0]
 cake2_height = cake2_size[1]
@@ -126,7 +127,7 @@ cake2_new_y_pos = 0
 
 # icecream object 2
 
-icecream2 =  pygame.image.load(os.path.join(game_dir, "icecream.png")).convert()
+icecream2 =  pygame.image.load(os.path.join(images_dir, "icecream.png")).convert()
 icecream2_size = icecream2.get_rect().size # get the size of original image. rectangle
 icecream2_width = icecream2_size[0]
 icecream2_height = icecream2_size[1]
@@ -139,7 +140,7 @@ icecream2_new_y_pos = 0
 ####################################### phase 3 ##############################################
 # cake object 2
 
-cake3 = pygame.image.load(os.path.join(game_dir, "cake.png")).convert()
+cake3 = pygame.image.load(os.path.join(images_dir, "cake.png")).convert()
 cake3_size = cake3.get_rect().size # get the size of original image. rectangle
 cake3_width = cake3_size[0]
 cake3_height = cake3_size[1]
@@ -149,7 +150,7 @@ cake3_new_y_pos = 0
 
 # icecream object 3
 
-icecream3 =  pygame.image.load(os.path.join(game_dir, "icecream.png")).convert()
+icecream3 =  pygame.image.load(os.path.join(images_dir, "icecream.png")).convert()
 icecream3_size = icecream3.get_rect().size # get the size of original image. rectangle
 icecream3_width = icecream3_size[0]
 icecream3_height = icecream3_size[1]
@@ -162,7 +163,7 @@ icecream3_new_y_pos = 0
 
 # cake object
 
-cake4 = pygame.image.load(os.path.join(game_dir, "cake.png")).convert()
+cake4 = pygame.image.load(os.path.join(images_dir, "cake.png")).convert()
 cake4_size = cake4.get_rect().size # get the size of original image. rectangle
 cake4_width = cake4_size[0]
 cake4_height = cake4_size[1]
@@ -172,7 +173,7 @@ cake4_new_y_pos = 0
 
 # icecream object
 
-icecream4 =  pygame.image.load(os.path.join(game_dir, "icecream.png")).convert()
+icecream4 =  pygame.image.load(os.path.join(images_dir, "icecream.png")).convert()
 icecream4_size = icecream4.get_rect().size # get the size of original image. rectangle
 icecream4_width = icecream4_size[0]
 icecream4_height = icecream4_size[1]

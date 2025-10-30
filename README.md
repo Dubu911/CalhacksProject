@@ -2,6 +2,20 @@
 
 A fast-paced arcade game built with Pygame where players must make healthy food choices to stay in shape while avoiding unhealthy snacks.
 
+## Screenshots
+
+<p align="center">
+  <img src="images/startingPage.png" width="45%" />
+  <img src="images/in_game_screenshot.png" width="45%" />
+</p>
+
+<p align="center">
+  <img src="images/WinScreen.png" width="45%" />
+  <img src="images/DefeatScreen.png" width="45%" />
+</p>
+
+<p align="center"><i>Catch healthy foods and avoid junk food to maintain your fitness!</i></p>
+
 ## Game Overview
 
 Control a character who must catch healthy foods (salad and chicken breast) while dodging unhealthy treats (cake and ice cream). The challenge increases over time as more junk food appears on screen. Stay fit for 60 seconds to win, but get too unhealthy and you'll lose!
@@ -23,22 +37,6 @@ Control a character who must catch healthy foods (salad and chicken breast) whil
 
 - **Win**: Reach 60 seconds with positive fitness level
 - **Lose**: Fitness level drops to 0 or below
-
-## Screenshots
-
-### Start Screen
-![Start Screen](startingPage.png)
-
-### Gameplay
-![Background](background.png)
-
-*Catch healthy foods and avoid junk food to maintain your fitness!*
-
-### Win Screen
-![Win Screen](WinScreen.png)
-
-### Defeat Screen
-![Defeat Screen](DefeatScreen.png)
 
 ## Installation
 
