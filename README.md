@@ -66,7 +66,7 @@ python main.py
 ## How to Play
 
 1. Launch the game by running `python main.py`
-2. Press CTRL on the start screen to begin
+2. Press CTRL on the keyboard to begin
 3. Use LEFT and RIGHT arrow keys to move your character
 4. Catch healthy foods (salad and chicken) to increase fitness
 5. Avoid unhealthy foods (cake and ice cream) to prevent fitness loss
